@@ -1,0 +1,64 @@
+import { getWorks, getCategories } from "../api.js";
+
+export const projectsList = async () => {
+  const works = await getWorks();
+  const categories = await getCategories();
+
+  insertWorksInGallery(works);
+  insertCategoriesInCategoryList(categories);
+  listenToCategoryLabels(works);
+};
+
+const listenToCategoryLabels = (works) => {
+  const categoryLabels = document.querySelectorAll("#portfolio .category-label");
+  categoryLabels.forEach((label) => {
+    label.addEventListener("click", () => handleCategoryClick(works, label));
+  });
+};
+
+const createWorkElement = (work) => {
+  const workTemplate = document.getElementById("work-template");
+  const workElement = workTemplate.content.cloneNode(true);
+  workElement.querySelector("img").src = work.imageUrl;
+  workElement.querySelector("figcaption").textContent = work.title;
+  return workElement;
+};
+
+const createCategoryElement = (category) => {
+  const categoryTemplate = document.getElementById("category-template");
+  const categoryElement = categoryTemplate.content.cloneNode(true);
+  categoryElement.querySelector("label").textContent = category.name;
+  categoryElement.querySelector("label").dataset.categoryId = category.id;
+  return categoryElement;
+};
+
+const filterWorksByCategory = (works, categoryId) => {
+  return works.filter((work) => work.categoryId === parseInt(categoryId));
+};
+
+const insertWorksInGallery = (works) => {
+  const gallery = document.querySelector("#portfolio .gallery");
+  gallery.innerHTML = "";
+  works.forEach((work) => {
+    const workElement = createWorkElement(work);
+    gallery.appendChild(workElement);
+  });
+};
+
+const insertCategoriesInCategoryList = (categories) => {
+  const categoryList = document.querySelector("#portfolio .categories");
+  categories.forEach((category) => {
+    const categoryElement = createCategoryElement(category);
+    categoryList.appendChild(categoryElement);
+  });
+};
+
+const handleCategoryClick = (works, label) => {
+  const categoryId = label.dataset.categoryId;
+  const new_works = filterWorksByCategory(works, categoryId);
+  if (categoryId === "0") {
+    insertWorksInGallery(works);
+  } else {
+    insertWorksInGallery(new_works);
+  }
+};
