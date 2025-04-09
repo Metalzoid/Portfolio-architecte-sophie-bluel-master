@@ -218,9 +218,83 @@ li a:hover {
 #introduction p {
   margin-bottom: 0.5em;
 }
-#portfolio h2 {
-  text-align: center;
+
+#my-works-container {
+  display: flex;
+  align-items: center;
   margin-bottom: 1em;
+  justify-content: center;
+  gap: 32px;
+}
+
+#my-works-container #edit-works-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+#modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0px;
+  height: 0px;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.3s ease;
+  display: flex;
+  opacity: 0;
+}
+
+#modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  min-width: 600px;
+  max-height: 600px;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  display: flex;
+}
+
+#modal-title {
+  font-family: "Work Sans";
+  font-weight: 400;
+  font-size: 28px;
+  color: black;
+  margin: 40px 0;
+}
+
+#modal-close-button {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  color: black;
+}
+
+#item-list {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+
+.modal-work-item {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.modal-work-item img {
+  max-width: 100px;
+  max-height: 100px;
+  object-fit: cover;
 }
 
 figcaption {

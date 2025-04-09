@@ -1,11 +1,14 @@
 export const logoutController = () => {
   const token = localStorage.getItem("token");
+  const logoutLink = document.querySelector("#login-link");
   if (token) {
-    const loginLink = document.querySelector("#login-link");
-    loginLink.textContent = "logout";
-    loginLink.addEventListener("click", () => {
-      localStorage.removeItem("token");
-      window.location.reload();
+    logoutLink.addEventListener("click", () => {
+      logout();
     });
   }
+};
+
+const logout = () => {
+  localStorage.removeItem("token");
+  window.location.reload();
 };

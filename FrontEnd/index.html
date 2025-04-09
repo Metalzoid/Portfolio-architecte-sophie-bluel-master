@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <meta name="description" content="">
     <link rel="stylesheet" href="./assets/style.css">
+    <script src="https://kit.fontawesome.com/df8b84a0d5.js" crossorigin="anonymous"></script>
     <script type="module" src="src/index.js"></script>  </head>
   <body>
     <header>
@@ -35,7 +36,9 @@
         </article>
       </section>
       <section id="portfolio">
-        <h2>Mes Projets</h2>
+        <div id="my-works-container">
+          <h2 id="my-works-title">Mes Projets</h2>
+        </div>
         <div class="categories">
           <label class="category-label active" data-category-id="0">Tous</label>
         </div>
@@ -67,6 +70,13 @@
           <figcaption></figcaption>
         </figure>
       </template>
+
+      <div id="modal-container">
+        <div id="modal-content">
+          <!-- Modal content will be loaded here -->
+        </div>
+      </div>
+
     </main>
 
     <footer>
