@@ -7,6 +7,7 @@ export const loggedInController = () => {
     appendEditWorksButton();
     hideCategories();
     listenEditWorksButton();
+    topEditHeader();
   }
 };
 
@@ -32,4 +33,17 @@ const listenEditWorksButton = () => {
   editWorksButton.addEventListener("click", () => {
     openModal();
   });
+};
+
+const topEditHeader = () => {
+  const html = `
+    <div id="top-edit-header">
+      <i class="fa-regular fa-pen-to-square"></i>
+      <p>Mode édition</p>
+    </div>
+  `;
+  const topEditHeader = document.querySelector("header");
+  topEditHeader.insertAdjacentHTML("afterbegin", html);
+  const body = document.querySelector("body");
+  body.style.marginTop = "60px";
 };

@@ -147,9 +147,44 @@ body {
 }
 header {
   display: flex;
+  flex-direction: column;
+  width: auto;
   justify-content: space-between;
   margin: 50px 0;
 }
+
+#header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#top-edit-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  background-color: black;
+  padding: 23px 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  gap: 10px;
+}
+
+#top-edit-header i {
+  color: white;
+  font-size: 16px;
+  background-color: transparent;
+}
+
+#top-edit-header p {
+  color: white;
+  font-size: 16px;
+  font-weight: 4z00;
+  background-color: transparent;
+}
+
 section {
   margin: 50px 0;
 }
@@ -282,6 +317,17 @@ li a:hover {
   color: black;
 }
 
+#modal-return-work-button {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  font-size: 21px;
+  color: black;
+}
+
 #item-list {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -305,17 +351,19 @@ li a:hover {
 
 .modal-delete-work-item-button {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 5px;
+  right: 4px;
   background-color: black;
   border: none;
   cursor: pointer;
-  padding: 3px 5px;
+  padding: 1px 4px;
+  border-radius: 3px;
 }
 
 .modal-delete-work-item-button i {
   color: white;
   background-color: black;
+  font-size: 10px;
 }
 
 #modal-add-work-button {
@@ -473,7 +521,6 @@ figcaption {
 
 input:focus {
   outline: 1px solid var(--primary-color);
-  padding: 0 10px;
 }
 
 input[type="submit"] {
@@ -514,6 +561,20 @@ hr {
   flex-direction: column;
   gap: 20px;
   background-color: white;
+}
+
+#modal-form select {
+  color: #444444;
+  font-family: "Work Sans";
+  font-size: 14px;
+  font-weight: 400;
+}
+
+#modal-form input {
+  color: #444444;
+  font-family: "Work Sans";
+  font-size: 14px;
+  font-weight: 400;
 }
 
 #image-preview-container {
@@ -573,12 +634,14 @@ hr {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #e8f1f6;
 }
 
 #preview-img {
   max-width: 100%;
   max-height: 100%;
-  object-fit: contain;
+  object-fit: cover;
+  aspect-ratio: 75 / 100;
 }
 
 .form-group {
