@@ -10,5 +10,4 @@ export const projectsList = async () => {
   insertWorksInGallery(works);
   insertCategoriesInCategoryList(categories);
   listenToCategoryLabels(works);
-
 };

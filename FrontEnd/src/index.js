@@ -6,7 +6,6 @@ import { loggedInController } from "./js/components/loggedInController.js";
 const init = async () => {
   logoutController();
   loggedInController();
-
   if (window.location.pathname === "/login.html") {
     loginFormController();
   } else {

@@ -1,7 +1,7 @@
 import { openModal, closeModal } from "./modalController.js";
 
 export const loggedInController = () => {
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
   if (token) {
     logoutTextButton();
     appendEditWorksButton();

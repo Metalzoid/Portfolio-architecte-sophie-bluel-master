@@ -31,5 +31,5 @@ const handleFormSuccess = (loginForm, formErrorContainer, token) => {
   formErrorContainer.textContent = "";
   loginForm.email.classList.remove("error");
   loginForm.password.classList.remove("error");
-  localStorage.setItem("token", token);
+  sessionStorage.setItem("token", token);
 };

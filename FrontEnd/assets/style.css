@@ -248,12 +248,15 @@ li a:hover {
   opacity: 0;
 }
 
+#modal-header {
+  background-color: white;
+}
+
 #modal-content {
   background-color: white;
   padding: 20px;
   border-radius: 10px;
   min-width: 600px;
-  max-height: 600px;
   flex-direction: column;
   align-items: center;
   position: relative;
@@ -283,18 +286,57 @@ li a:hover {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 10px;
+  margin-bottom: 4rem;
 }
 
 .modal-work-item {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  position: relative;
 }
 
 .modal-work-item img {
   max-width: 100px;
   max-height: 100px;
   object-fit: cover;
+  aspect-ratio: 75 / 100;
+}
+
+.modal-delete-work-item-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: black;
+  border: none;
+  cursor: pointer;
+  padding: 3px 5px;
+}
+
+.modal-delete-work-item-button i {
+  color: white;
+  background-color: black;
+}
+
+#modal-add-work-button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 60px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-family: "Syne";
+  font-size: 14px;
+  font-weight: 700;
+  transition: background-color 0.3s ease;
+  margin: 2rem auto;
+  width: 100%;
+  max-width: 300px;
+  display: block;
+}
+
+.modal-add-work-button:hover {
+  background-color: #0a6b5b;
 }
 
 figcaption {
@@ -458,4 +500,144 @@ footer nav ul {
 
 footer {
   margin-top: auto;
+}
+
+hr {
+  width: 65%;
+  background-color: #000;
+}
+
+/* Styles pour le formulaire d'ajout de photo */
+#modal-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: white;
+}
+
+#image-preview-container {
+  width: 420px;
+  height: 169px;
+  background-color: #e8f1f6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  border-radius: 3px;
+}
+
+#image-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: #e8f1f6;
+}
+#image-placeholder * {
+  background: transparent;
+}
+
+#image-placeholder i {
+  font-size: 58px;
+  color: #b9c5cc;
+  margin-bottom: 15px;
+}
+
+.custom-file-upload {
+  background-color: #cbd6dc !important;
+  color: #306685;
+  padding: 10px 33px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-family: "Work Sans";
+  font-size: 14px;
+  margin-bottom: 7px;
+}
+
+.file-format {
+  color: #444444;
+  font-size: 10px;
+}
+
+#modal-file-input {
+  display: none;
+}
+
+#image-preview {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#preview-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  width: 420px;
+  margin: 0 auto;
+  background-color: white;
+}
+
+.form-group label {
+  color: #3d3d3d;
+  font-family: "Work Sans";
+  font-size: 14px;
+  margin-bottom: 10px;
+  background-color: white;
+}
+
+.form-group input,
+.form-group select {
+  height: 50px;
+  font-size: 14px;
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+  padding: 0 10px;
+  background-color: white;
+}
+
+#modal-form hr {
+  width: 100%;
+  margin: 20px 0;
+}
+
+#modal-submit-button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 60px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-family: "Syne";
+  font-size: 14px;
+  font-weight: 700;
+  transition: background-color 0.3s ease;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 237px;
+}
+
+#modal-submit-button:disabled {
+  background-color: #a7a7a7;
+  cursor: not-allowed;
+}
+
+#modal-header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 30px;
 }

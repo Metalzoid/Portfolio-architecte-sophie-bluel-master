@@ -1,4 +1,5 @@
 const API_URL = "http://localhost:5678/api/";
+const token = sessionStorage.getItem("token");
 
 export const login = async (email, password) => {
   try {
@@ -43,19 +44,19 @@ export const getCategories = async () => {
 
 export const postWork = async (work) => {
   try {
+    console.log(token);
+
     const response = await fetch(`${API_URL}works`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
-        accept: "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify(work),
+      body: work,
     });
     const data = await response.json();
     return data;
-  } catch {
-    return { error: "Erreur lors de l'ajout du travail" };
+  } catch (error) {
+    return { error: "Erreur lors de l'ajout du travail : ", err };
   }
 };
 
@@ -68,9 +69,8 @@ export const deleteWork = async (id) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    const data = await response.json();
-    return data;
-  } catch {
-    return { error: "Erreur lors de la suppression du travail" };
+    return response;
+  } catch (err) {
+    return { error: "Erreur lors de la suppression du travail : ", err };
   }
 };
