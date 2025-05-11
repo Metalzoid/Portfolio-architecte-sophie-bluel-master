@@ -44,8 +44,6 @@ export const getCategories = async () => {
 
 export const postWork = async (work) => {
   try {
-    console.log(token);
-
     const response = await fetch(`${API_URL}works`, {
       method: "POST",
       headers: {
