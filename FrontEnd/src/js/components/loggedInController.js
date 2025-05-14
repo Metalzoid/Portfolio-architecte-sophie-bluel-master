@@ -1,4 +1,4 @@
-import { openModal, closeModal } from "./modalController.js";
+import { openModal } from "./modalController.js";
 
 export const loggedInController = () => {
   const token = sessionStorage.getItem("token");
@@ -20,7 +20,6 @@ const appendEditWorksButton = () => {
   const myWorksContainer = document.querySelector("#my-works-container");
   const editWorksButton = '<div id="edit-works-button"><i class="fa-regular fa-pen-to-square"></i>modifier</div>';
   myWorksContainer.insertAdjacentHTML("beforeend", editWorksButton);
-
 };
 
 const hideCategories = () => {

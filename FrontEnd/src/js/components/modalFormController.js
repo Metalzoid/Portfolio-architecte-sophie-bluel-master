@@ -1,21 +1,25 @@
-import { getCategories, postWork } from "../api.js";
+import { getCategories, postWork, getWorks } from "../api.js";
 import { projectsList } from "./projectsListController.js";
-import { loadModalContent } from "./modalController.js";
+import {
+  loadModalContent,
+  listenCloseModal,
+  listenAddWorkButton,
+} from "./modalController.js";
 
 export const addPhotoForm = async () => {
   const modalContent = document.querySelector("#modal-content");
   let html = `
     <div id="modal-header">
       <h2 id="modal-title">Ajout photo</h2>
-      <button id="modal-close-button" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
-      <button id="modal-return-work-button" onclick="returnWork()"><i class="fa-solid fa-arrow-left"></i></button>
+      <button id="modal-close-button"><i class="fa-solid fa-xmark"></i></button>
+      <button id="modal-return-work-button"><i class="fa-solid fa-arrow-left"></i></button>
     </div>
-    <form id="modal-form" onsubmit="submitPhoto(event)">
+    <form id="modal-form">
       <div id="image-preview-container">
         <div id="image-placeholder">
           <i class="fa-regular fa-image"></i>
           <label for="modal-file-input" class="custom-file-upload">+ Ajouter photo</label>
-          <input type="file" id="modal-file-input" accept="image/*" name="image" onchange="previewImage(event)" oninput="validateForm()">
+          <input type="file" id="modal-file-input" accept="image/*" name="image">
           <p class="file-format">jpg, png : 4mo max</p>
         </div>
         <div id="image-preview" style="display: none;">
@@ -24,11 +28,11 @@ export const addPhotoForm = async () => {
       </div>
       <div class="form-group">
         <label for="modal-title-input">Titre</label>
-        <input type="text" id="modal-title-input" name="title" oninput="validateForm()">
+        <input type="text" id="modal-title-input" name="title">
       </div>
       <div class="form-group">
         <label for="modal-category-input">Catégorie</label>
-        <select id="modal-category-input" name="category" oninput="validateForm()">
+        <select id="modal-category-input" name="category">
   `;
   html += await insertCategoriesInCategoriesOptions();
   html += `
@@ -39,6 +43,11 @@ export const addPhotoForm = async () => {
     </form>
     `;
   modalContent.innerHTML = html;
+  listenCloseModal();
+  listenReturnModal();
+  listenFileInput();
+  listenAllFields();
+  listenFormSubmit();
 };
 
 const insertCategoriesInCategoriesOptions = async () => {
@@ -73,18 +82,21 @@ export const submitPhoto = async (e) => {
   const newFormData = new FormData();
   newFormData.append("title", title);
   newFormData.append("image", image);
-  newFormData.append("category", category);
+  newFormData.append("category", parseInt(category));
 
   try {
-    const response = await postWork(newFormData);
-    if (response.error) {
+    const newWork = await postWork(newFormData);
+    if (newWork.error) {
       alert("Une erreur est survenue lors de l'ajout de la photo !");
       submitButton.disabled = false;
       submitButton.textContent = "Valider";
     } else {
-      const modalContent = document.querySelector("#modal-content");
-      loadModalContent(modalContent);
-      projectsList();
+      const works = await getWorks();
+      window.works = works;
+
+      loadModalContent(works);
+      projectsList(works);
+      listenAddWorkButton(works);
     }
   } catch (error) {
     console.error("Erreur lors de l'envoi du formulaire:", error);
@@ -121,13 +133,33 @@ export const validateForm = () => {
   submitButton.disabled = !(title && category && image);
 };
 
-export const returnWork = () => {
-  const modalContent = document.querySelector("#modal-content");
-  loadModalContent(modalContent);
+const listenFileInput = () => {
+  const fileInput = document.querySelector("#modal-file-input");
+  fileInput.addEventListener("change", (e) => {
+    previewImage(e);
+  });
 };
 
-// Exposer les fonctions à la fenêtre globale
-window.submitPhoto = submitPhoto;
-window.previewImage = previewImage;
-window.validateForm = validateForm;
-window.returnWork = returnWork;
+const listenAllFields = () => {
+  const title = document.getElementById("modal-title-input");
+  const category = document.getElementById("modal-category-input");
+  const image = document.getElementById("modal-file-input");
+  title.addEventListener("input", validateForm);
+  category.addEventListener("input", validateForm);
+  image.addEventListener("input", validateForm);
+};
+
+const listenFormSubmit = () => {
+  const form = document.querySelector("#modal-form");
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    submitPhoto(e);
+  });
+};
+
+const listenReturnModal = () => {
+  const returnButton = document.querySelector("#modal-return-work-button");
+  returnButton.addEventListener("click", () => {
+    loadModalContent();
+  });
+};
